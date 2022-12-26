@@ -1,4 +1,4 @@
-const searchParams = 'name.official, capital, population, flags, languages';
+const searchParams = 'name,capital,population,flags,languages';
 
 export function fetchCountries(name) {
     return fetch(`https://restcountries.com/v3.1/name/${name}?fields=${searchParams}`)
