@@ -18,6 +18,10 @@ function onSearch(event) {
 
     let onSearch = onInput.value.trim();
     console.log(onSearch);
+    if (onSearch === "") {
+        cntrList.innerHTML = "";
+        cntrInfo.innerHTML = "";
+    }
 
     fetchCountries(onSearch)
         .then(data => {
