@@ -1,7 +1,6 @@
 import './css/styles.css';
 import debounce from 'lodash.debounce';
 import Notiflix from 'notiflix';
-import 'notiflix/dist/notiflix-3.2.5.min.css';
 
 import { fetchCountries } from './js/fetchCountries';
 
@@ -17,7 +16,7 @@ function onSearch(event) {
     event.preventDefault();
 
     let onSearch = onInput.value.trim();
-    console.log(onSearch);
+
     if (onSearch === "") {
         cntrList.innerHTML = "";
         cntrInfo.innerHTML = "";
@@ -29,14 +28,10 @@ function onSearch(event) {
                 Notiflix.Notify.info('Too many matches found. Please enter a more specific name.');
             }
             if (data.length > 1 && data.length <= 10) {
-                Notiflix.Notify.success('Success all');
                 renderAllCountries(data);
-                console.log(data);
             }
             if (data.length === 1) {
-                Notiflix.Notify.success('Success Single');
                 renderSingleCountry(data);
-                console.log(data);
             }
         })
     
@@ -49,7 +44,7 @@ function renderAllCountries(country) {
     cntrList.style.listStyle = "none";
     const markup = country
         .map((el) => {
-            return `<li><img src="${el.flags.svg}" alt="${el.name.official}" width="60" height="60"><b><style="font-weight: 800">${el.name.common}</b></li>`
+            return `<li><img src="${el.flags.svg}" alt="${el.name.official}" width="50"><b>${el.name.common}</b></li>`
         })
         .join("");
     cntrList.innerHTML = markup;
@@ -58,7 +53,7 @@ function renderAllCountries(country) {
 function renderSingleCountry(country) {
     const markup = country
     .map((el) => {
-        return `<p><img src="${el.flags.svg}" alt="${el.name.official}" width="100"><b>${el.name.official}</b></p>
+        return `<p><img src="${el.flags.svg}" alt="${el.name.official}" width="100"><h1>${el.name.official}</h1></p>
         <p><b>Capital: </b>${el.capital}</p>
         <p><b>Population: </b>${el.population}</p>
         <p><b>Languages: </b>${Object.values(el.languages)}</p>`
@@ -66,8 +61,3 @@ function renderSingleCountry(country) {
         .join("");
     cntrList.innerHTML = markup;
 }
-// name.official - повна назва країни
-// capital - столиця
-// population - населення
-// flags.svg - посилання на зображення прапора
-// languages 
